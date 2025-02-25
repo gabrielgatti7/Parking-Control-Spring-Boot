@@ -1,47 +1,31 @@
-package com.api.parking_control.models;
+package com.api.parking_control.dtos;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity     // Indicates that this class represents a table
-@Table(name = "parking_spots")
-public class ParkingSpotModel implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class ParkingSpotDto {
 
-    @Id     // Defines the primary key
-    @GeneratedValue(strategy = GenerationType.AUTO) // ID will be generated automatically
-    private UUID id;
-    @Column(nullable = false, unique = true, length = 10)
+    @NotBlank
     private String parkingSpotNumber;
-    @Column(nullable = false, unique = false, length = 7)
+    @NotBlank
+    @Size(max = 7)
     private String licensePlateCar;
-    @Column(nullable = false, length = 70)
+    @NotBlank
     private String brandCar;
-    @Column(nullable = false, length = 70)
+    @NotBlank
     private String modelCar;
-    @Column(nullable = false, length = 70)
+    @NotBlank
     private String colorCar;
-    @Column(nullable = false)
-    private LocalDateTime registrationDate;
-    @Column(nullable = false, length = 130)
+    @NotBlank
     private String responsibleName;
-    @Column(nullable = false, length = 30)
+    @NotBlank
     private String apartment;
-    @Column(nullable = false, length = 30)
+    @NotBlank
     private String block;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public String getParkingSpotNumber() {
         return parkingSpotNumber;
@@ -81,14 +65,6 @@ public class ParkingSpotModel implements Serializable {
 
     public void setColorCar(String colorCar) {
         this.colorCar = colorCar;
-    }
-
-    public LocalDateTime getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(LocalDateTime registrationDate) {
-        this.registrationDate = registrationDate;
     }
 
     public String getResponsibleName() {
